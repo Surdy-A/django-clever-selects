@@ -14,7 +14,12 @@ except:
 from django.core.validators import EMPTY_VALUES
 from django.db import models
 from django.http.request import HttpRequest
-from django.utils.encoding import smart_str, force_str
+
+try:
+    from django.utils.encoding import smart_str, force_str
+except ImportError:
+    # Not amazing way of preserving backwards compatibility for quite old Django
+    from django.utils.encoding import smart_str, force_text as force_str
 
 from .form_fields import ChainedChoiceField, ChainedModelChoiceField, ChainedModelMultipleChoiceField
 
